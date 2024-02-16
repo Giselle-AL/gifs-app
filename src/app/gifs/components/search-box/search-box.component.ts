@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { GifsService} from '../../services/gifs.service';
 
 @Component({
   selector: 'gifs-search-box',
@@ -7,19 +8,30 @@ import { Component, OnInit } from '@angular/core';
   <input type="text"
   class="form-control"
   placeholder="Buscar gifs..."
-  (keyup)="SearchTag(txtTagInput.value)"
+  (keyup.enter)="searchTag()"
   #txtTagInput
   >
   `
 
 })
 
-export class SearchBocxComponent{
+export class SearchBoxComponent{
 
-  constructor(){}
+  @ViewChild('txtTagInput')
+  public tagInput!: ElementRef<HTMLInputElement>
 
-  SearchTag(newTag:string):void{
-    console.log({newTag})
+  constructor(private gifsService: GifsService){}
+
+  //SearchTag(newTag:string):void{
+  searchTag(){
+    //se asigna el valor a la variable
+    const newTag = this.tagInput.nativeElement.value;
+
+    this.gifsService.searchTag(newTag);
+
+    //se limpia la caja de texto
+    this.tagInput.nativeElement.value='';
+
 
   }
 

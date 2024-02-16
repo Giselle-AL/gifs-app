@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { GifsModule } from './gifs/gifs.module';
@@ -13,7 +14,9 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
+    //la palabra module, va en los imports
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     GifsModule,
     SharedModule,
